@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zrnge | Cyber Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --neon: #00f3ff;
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --border: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #e0e0e0;
+            font-family: 'JetBrains Mono', monospace;
+            scroll-behavior: smooth;
+        }
+
+        .cyber-border {
+            border: 1px solid var(--border);
+        }
+
+        .cyber-border-neon {
+            border: 1px solid var(--neon);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-flat {
+            background: var(--neon);
+            color: black;
+            transition: all 0.2s ease;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .btn-flat:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+        }
+
+        .grid-overlay {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .terminal-text {
+            color: var(--neon);
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        ::selection {
+            background: var(--neon);
+            color: black;
+        }
+    </style>
+</head>
+<body class="grid-overlay">
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 bg-[#050505] border-b border-[#1a1a1a] py-4">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <span class="text-white font-bold tracking-widest text-lg">ZRNGE::SYS</span>
+            <div class="space-x-8 hidden md:flex text-[10px] tracking-[0.3em] font-bold uppercase">
+                <a href="#about" class="hover:text-[#00f3ff] transition">ID_DATA</a>
+                <a href="#projects" class="hover:text-[#00f3ff] transition">NODE_ARCHIVE</a>
+                <a href="https://github.com/zrnge" class="hover:text-[#00f3ff] transition">GIT_ROOT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Entry -->
+    <header class="pt-48 pb-32 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-4 inline-block px-2 py-1 bg-[#111] border border-[#222] text-[10px] uppercase tracking-tighter">
+                Session: <span class="terminal-text">Active_Node_01</span>
+            </div>
+            
+            <h1 class="text-7xl md:text-9xl font-black mb-8 tracking-tighter text-white">
+                ZRNGE<span class="terminal-text">_</span>
+            </h1>
+            
+            <p class="text-lg text-slate-500 mb-12 max-w-xl leading-relaxed">
+                Independent security researcher. Developing automated recon systems and defensive architecture.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6">
+                <a href="https://zrnge.github.io/Z-Hound/" class="btn-flat px-12 py-5 font-bold flex items-center justify-center gap-3">
+                    <i class="fas fa-bolt"></i>
+                    LAUNCH Z-HOUND
+                </a>
+                
+                <a href="#projects" class="px-12 py-5 border border-[#333] font-bold text-slate-300 hover:border-[#00f3ff] hover:text-[#00f3ff] transition-all flex items-center justify-center">
+                    ACCESS_PROJECTS
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Data Log -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-1">
+                <div class="border border-[#222] p-8">
+                    <div class="flex items-center gap-2 mb-8 border-b border-[#1a1a1a] pb-4">
+                        <div class="w-2 h-2 bg-[#00f3ff]"></div>
+                        <span class="text-xs font-bold tracking-[0.2em] text-slate-500 uppercase">System_Identity_Log</span>
+                    </div>
+
+                    <div class="space-y-6 text-sm md:text-base">
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <span class="text-slate-600 w-32 uppercase text-xs font-bold pt-1">User_Handle</span>
+                            <span class="text-white">zrnge</span>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <span class="text-slate-600 w-32 uppercase text-xs font-bold pt-1">Specialization</span>
+                            <span class="text-white">Penetration Testing / Python / AI Security</span>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <span class="text-slate-600 w-32 uppercase text-xs font-bold pt-1">Current_Obj</span>
+                            <span class="text-slate-400 italic">"Engineering the next generation of automated reconnaissance tools. Bridging the gap between LLMs and offensive security workflows."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Node Grid -->
+    <section id="projects" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="mb-16 border-l-4 border-[#00f3ff] pl-6">
+                <h2 class="text-3xl font-bold text-white uppercase tracking-tighter">System_Nodes</h2>
+                <p class="text-slate-500 text-xs mt-2 uppercase tracking-widest">Repository of active developments</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
+                
+                <!-- Z-Hound -->
+                <div class="bg-[#050505] p-10 group hover:bg-[#080808] transition-colors">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="terminal-text text-3xl">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <div class="px-2 py-1 border border-[#00f3ff] text-[#00f3ff] text-[10px] font-bold">NODE_01</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-[#00f3ff] transition">Z-HOUND</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                        Advanced recon engine for automated digital footprint analysis and exposure mapping.
+                    </p>
+                    <div class="flex gap-4 text-[10px] font-bold text-slate-600">
+                        <span>#PY_ENGINE</span>
+                        <span>#SEC_TOOLS</span>
+                    </div>
+                </div>
+
+                <!-- Ease DB -->
+                <div class="bg-[#050505] p-10 group hover:bg-[#080808] transition-colors">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="text-slate-700 text-3xl">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <div class="px-2 py-1 border border-[#222] text-slate-500 text-[10px] font-bold">NODE_02</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-slate-300 transition">EASE-DB</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                        Flat-file and SQLite management interface for rapid local database prototyping.
+                    </p>
+                    <div class="flex gap-4 text-[10px] font-bold text-slate-600">
+                        <span>#SQLITE</span>
+                        <span>#SYSTEMS</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-[#1a1a1a] px-6 bg-[#030303]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <p class="text-[10px] text-slate-600 uppercase tracking-[0.4em] font-bold mb-2">Internal_Security_Protocol_v2.0</p>
+                <p class="text-[10px] text-slate-700">© 2026 // NODE_ZRNGE // NO_RIGHTS_RESERVED</p>
+            </div>
+            
+            <div class="flex gap-8">
+                <a href="https://github.com/zrnge" class="text-slate-600 hover:text-[#00f3ff] transition text-2xl"><i class="fab fa-github"></i></a>
+                <a href="mailto:contact@zrnge.io" class="text-slate-600 hover:text-[#00f3ff] transition text-2xl"><i class="fas fa-terminal"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
