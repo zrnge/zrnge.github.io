@@ -370,8 +370,8 @@ button{font-family:inherit}
         <button class="chip" data-filter="source">Source</button>
       </div>
       <select class="sort-select" id="sortSelect">
-        <option value="updated">Recently updated</option>
         <option value="stars">Most stars</option>
+        <option value="updated">Recently updated</option>
         <option value="name">Name (A–Z)</option>
         <option value="created">Newest</option>
       </select>
@@ -416,7 +416,7 @@ const LANG_COLORS = {
 let allRepos = [];
 let filteredRepos = [];
 let currentFilter = 'all';
-let currentSort = 'updated';
+let currentSort = 'stars';
 let currentSearch = '';
 let currentPage = 1;
 
@@ -470,7 +470,11 @@ function applyFilters(){
   }
 
   list.sort((a,b) => {
-    if (currentSort === 'stars') return b.stargazers_count - a.stargazers_count;
+    if (currentSort === 'stars'){
+      // primary: stars desc, tiebreaker: most recently updated
+      if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    }
     if (currentSort === 'name')  return a.name.localeCompare(b.name);
     if (currentSort === 'created') return new Date(b.created_at) - new Date(a.created_at);
     return new Date(b.updated_at) - new Date(a.updated_at);
