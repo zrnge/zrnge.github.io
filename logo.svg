@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>zrnge</title>
+  <rect width="512" height="512" fill="#0d0d12"/>
+  <path fill="#3a1208" d="M156 132 L368 132 L368 196 L260 318 L368 318 L368 386 L150 386 L150 322 L256 200 L156 200 Z"/>
+  <path fill="#FF4D1C" d="M150 126 L362 126 L362 190 L254 312 L362 312 L362 380 L144 380 L144 316 L250 194 L150 194 Z"/>
+  <path fill="#FFB38A" d="M150 126 L362 126 L362 152 L150 152 Z"/>
+  <path fill="#FFB38A" d="M144 354 L362 354 L362 380 L144 380 Z"/>
+  <path fill="#FF8A3D" d="M384 150 L420 150 L420 162 L384 162 Z M384 174 L408 174 L408 186 L384 186 Z M384 198 L432 198 L432 210 L384 210 Z"/>
+  <path fill="#FF8A3D" d="M92 320 L128 320 L128 332 L92 332 Z M104 344 L128 344 L128 356 L104 356 Z M80 368 L128 368 L128 380 L80 380 Z"/>
+  <path fill="#FFE08A" d="M150 126 L176 126 L150 152 Z"/>
+  <path fill="#FFE08A" d="M336 380 L362 380 L362 354 Z"/>
+</svg>
