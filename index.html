@@ -3,68 +3,90 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zrnge</title>
-<meta name="description" content="Zrnge — projects and code." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>" />
+<title>Zrnge — Security tools &amp; projects</title>
+<meta name="description" content="Cybersecurity analyst & developer. Open-source security tools for log analysis, reverse engineering, and incident response — most run entirely in your browser." />
+<link rel="canonical" href="https://zrnge.com/" />
+<link rel="icon" href="logo.svg" type="image/svg+xml" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d0d12" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Zrnge — Security tools &amp; projects" />
+<meta property="og:description" content="Open-source security tools for log analysis, reverse engineering, and incident response — most run entirely in your browser." />
+<meta property="og:url" content="https://zrnge.com/" />
+<meta property="og:image" content="https://zrnge.com/logo.svg" />
+<meta name="twitter:card" content="summary" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script>
-  // Run before render to prevent flash of wrong theme.
-  // Priority: explicit user choice (in-memory only, since this is GH Pages static), else system preference.
+  // Runs before first paint to avoid a flash of the wrong theme.
+  // Priority: saved choice (localStorage) > system preference.
   (function(){
     try {
-      const stored = window.__zrngeTheme; // set by toggle if user clicks during session
-      const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored || (systemDark ? 'dark' : 'light');
+      var stored = localStorage.getItem('zrnge:theme');
+      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = (stored === 'dark' || stored === 'light') ? stored : (systemDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
-    } catch(e){}
+    } catch(e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   })();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Zrnge","url":"https://zrnge.com","email":"mailto:ayub@zrnge.com","jobTitle":"Cybersecurity Analyst & Developer","sameAs":["https://github.com/zrnge"]}
 </script>
 
 <style>
 :root{
-  /* Claude palette - light */
-  --bg:#faf9f5;
+  /* zrnge brand — light */
+  --bg:#faf9f7;
   --surface:#ffffff;
-  --surface-2:#f4f3ee;
-  --border:#e8e6dc;
-  --border-strong:#d9d6c7;
-  --text:#1f1e1d;
-  --text-muted:#5a5856;
-  --text-soft:#8b8a86;
-  --accent:#cc785c;
-  --accent-hover:#b86948;
-  --accent-soft:#f3ddd2;
-  --accent-faint:#fbf2ed;
-  --nav-bg:rgba(250,249,245,0.85);
-  --shimmer:rgba(204,120,92,.06);
+  --surface-2:#f3f1eb;
+  --border:#e8e4db;
+  --border-strong:#d7d2c6;
+  --text:#1c1a17;
+  --text-muted:#57534b;
+  --text-soft:#8a857b;
+  --accent:#d13f0c;
+  --accent-hover:#b53509;
+  --on-accent:#ffffff;
+  --accent-soft:#fbdfd2;
+  --accent-faint:#fdf3ec;
+  --nav-bg:rgba(250,249,247,0.85);
+  --shimmer:rgba(209,63,12,.06);
+  --grid-dot:rgba(28,26,23,.14);
+  --glow:rgba(255,77,28,.07);
   --radius:10px;
   --radius-sm:6px;
-  --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif:'Source Serif 4', Georgia, serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
   --shadow-sm:0 1px 2px rgba(0,0,0,0.04);
 }
 
-/* Dark mode — applied when user picks dark OR (system is dark AND user hasn't overridden) */
+/* zrnge brand — dark (matches the logo background #0d0d12) */
 [data-theme="dark"]{
-  --bg:#1a1815;
-  --surface:#262421;
-  --surface-2:#302d2a;
-  --border:#3a3633;
-  --border-strong:#4a4642;
-  --text:#ecebe6;
-  --text-muted:#b5b2ab;
-  --text-soft:#807c75;
-  --accent:#e8a07f;
-  --accent-hover:#f0b594;
-  --accent-soft:#3d2e26;
-  --accent-faint:#2a221e;
-  --nav-bg:rgba(26,24,21,0.85);
-  --shimmer:rgba(232,160,127,.08);
-  --shadow-sm:0 1px 2px rgba(0,0,0,0.2);
+  --bg:#0d0d12;
+  --surface:#16151d;
+  --surface-2:#1f1e27;
+  --border:#2a2833;
+  --border-strong:#3b3847;
+  --text:#edeae4;
+  --text-muted:#a9a5ae;
+  --text-soft:#716d7c;
+  --accent:#ff6a38;
+  --accent-hover:#ff824f;
+  --on-accent:#1b0c05;
+  --accent-soft:#3c1d10;
+  --accent-faint:#1b1719;
+  --nav-bg:rgba(13,13,18,0.82);
+  --shimmer:rgba(255,106,56,.07);
+  --grid-dot:rgba(237,234,228,.09);
+  --glow:rgba(255,77,28,.10);
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.25);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -81,21 +103,43 @@ body{
 }
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-/* Theme toggle button */
+/* ---------- nav ---------- */
+.nav{
+  border-bottom:1px solid var(--border);
+  padding:14px 0;
+  background:var(--nav-bg);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:50;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;min-width:0}
+.brand-mark{
+  width:30px;height:30px;border-radius:8px;
+  overflow:hidden;flex-shrink:0;
+  box-shadow:var(--shadow-sm);
+}
+.brand-mark svg{display:block;width:100%;height:100%}
+.brand-text span{color:var(--text-soft);font-weight:400}
+.nav-links{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.nav-links a{
+  font-size:14px;color:var(--text-muted);
+  padding:7px 12px;border-radius:6px;
+  transition:.15s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--text);background:var(--surface-2)}
+
 .theme-toggle{
   display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;
   background:transparent;border:1px solid var(--border);
   border-radius:var(--radius-sm);
   color:var(--text-muted);cursor:pointer;
-  transition:.15s;padding:0;
-  margin-left:4px;
+  transition:.15s;padding:0;margin-left:4px;
 }
-.theme-toggle:hover{
-  color:var(--text);background:var(--surface-2);
-  border-color:var(--border-strong);
-}
+.theme-toggle:hover{color:var(--text);background:var(--surface-2);border-color:var(--border-strong)}
 .theme-toggle svg{width:16px;height:16px}
 .theme-toggle .icon-sun{display:none}
 .theme-toggle .icon-moon{display:block}
@@ -104,102 +148,91 @@ button{font-family:inherit}
 
 .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
 
-.nav{
-  border-bottom:1px solid var(--border);
-  padding:18px 0;
-  background:var(--nav-bg);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  position:sticky;top:0;z-index:50;
+/* ---------- hero ---------- */
+.hero{padding:72px 0 48px;position:relative}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(700px 320px at 85% -20%, var(--glow), transparent 70%),
+    radial-gradient(var(--grid-dot) 1px, transparent 1.5px);
+  background-size:auto, 24px 24px;
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 55%, transparent 92%);
+  mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 55%, transparent 92%);
 }
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
-.brand-mark{
-  width:28px;height:28px;border-radius:6px;
-  background:var(--accent);color:white;
-  display:grid;place-items:center;
-  font-weight:600;font-size:14px;
-  font-family:var(--serif);
-}
-.brand-text span{color:var(--text-soft);font-weight:400}
-.nav-links{display:flex;gap:4px;align-items:center}
-.nav-links a{
-  font-size:14px;color:var(--text-muted);
-  padding:7px 12px;border-radius:6px;
-  transition:.15s;
-}
-.nav-links a:hover{color:var(--text);background:var(--surface-2)}
-
-.hero{padding:72px 0 48px}
-.hero h1{
-  font-family:var(--serif);
-  font-weight:500;
-  font-size:clamp(36px, 5.5vw, 56px);
-  line-height:1.1;
-  letter-spacing:-0.02em;
-  margin-bottom:20px;
-  max-width:720px;
-}
-.hero h1 em{
-  font-style:italic;
+.hero .wrap{position:relative}
+.kicker{
+  font-family:var(--mono);
+  font-size:12.5px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
   color:var(--accent);
-  font-weight:500;
+  margin-bottom:16px;
 }
+.hero h1{
+  font-weight:700;
+  font-size:clamp(32px, 5vw, 52px);
+  line-height:1.12;
+  letter-spacing:-0.025em;
+  margin-bottom:20px;
+  max-width:760px;
+}
+.hero h1 em{font-style:normal;color:var(--accent)}
 .hero-sub{
-  font-size:17px;
+  font-size:16.5px;
   color:var(--text-muted);
-  max-width:580px;
-  line-height:1.6;
+  max-width:620px;
+  line-height:1.65;
   margin-bottom:28px;
 }
 .hero-meta{
   display:flex;flex-wrap:wrap;gap:24px;
-  font-size:13px;color:var(--text-soft);
+  font-family:var(--mono);
+  font-size:12.5px;color:var(--text-soft);
 }
 .hero-meta b{color:var(--text);font-weight:600}
 
-.section{padding:24px 0 80px}
+/* ---------- sections ---------- */
+.section{padding:24px 0 72px;scroll-margin-top:76px}
 .section-head{
   display:flex;align-items:baseline;justify-content:space-between;
   margin-bottom:24px;gap:16px;flex-wrap:wrap;
   padding-bottom:16px;
   border-bottom:1px solid var(--border);
 }
-.section-head h2{
-  font-family:var(--serif);
-  font-size:24px;
-  font-weight:500;
-  letter-spacing:-0.01em;
-}
+.section-head h2{font-size:22px;font-weight:600;letter-spacing:-0.015em}
 .section-count{
-  font-size:13px;color:var(--text-soft);
+  font-family:var(--mono);
+  font-size:12.5px;color:var(--text-soft);
   font-variant-numeric:tabular-nums;
 }
 .section-count b{color:var(--text);font-weight:600}
 
-.controls{
-  display:flex;gap:10px;margin-bottom:24px;
-  align-items:center;flex-wrap:wrap;
-}
+/* ---------- controls ---------- */
+.controls{display:flex;gap:10px;margin-bottom:20px;align-items:center;flex-wrap:wrap}
 .search{flex:1;min-width:220px;position:relative}
 .search input{
   width:100%;background:var(--surface);
   border:1px solid var(--border);
   color:var(--text);font-family:var(--sans);font-size:14px;
-  padding:10px 14px 10px 38px;
+  padding:10px 40px 10px 38px;
   border-radius:var(--radius-sm);
   transition:.15s;
 }
-.search input:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px var(--accent-soft);
-}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .search input::placeholder{color:var(--text-soft)}
-.search svg{
+.search > svg{
   position:absolute;left:13px;top:50%;transform:translateY(-50%);
-  width:15px;height:15px;color:var(--text-soft);
+  width:15px;height:15px;color:var(--text-soft);pointer-events:none;
 }
-.filters{display:flex;gap:4px;background:var(--surface);
+.search kbd{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:11px;
+  color:var(--text-soft);
+  border:1px solid var(--border);border-radius:4px;
+  padding:1px 6px;background:var(--surface-2);
+  pointer-events:none;
+}
+.filters{
+  display:flex;gap:4px;background:var(--surface);
   border:1px solid var(--border);border-radius:var(--radius-sm);
   padding:3px;
 }
@@ -219,6 +252,18 @@ button{font-family:inherit}
 }
 .sort-select:focus{outline:none;border-color:var(--accent)}
 
+/* ---------- data notice ---------- */
+.notice{
+  margin-bottom:16px;
+  font-size:13px;color:var(--text-muted);
+  background:var(--accent-faint);
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  padding:10px 14px;border-radius:var(--radius-sm);
+}
+.notice[hidden]{display:none}
+
+/* ---------- repo list ---------- */
 .repo-list{
   background:var(--surface);
   border:1px solid var(--border);
@@ -241,14 +286,17 @@ button{font-family:inherit}
   font-size:16px;font-weight:600;
   color:var(--text);
   letter-spacing:-0.005em;
+  transition:.15s;
 }
+a.repo-name:hover{color:var(--accent)}
 .repo-badge{
   display:inline-flex;align-items:center;gap:4px;
-  font-size:11px;font-weight:600;
+  font-family:var(--mono);
+  font-size:10.5px;font-weight:600;
   color:var(--accent);
   background:var(--accent-soft);
   padding:2px 8px;border-radius:999px;
-  letter-spacing:.02em;
+  letter-spacing:.04em;
 }
 .repo-badge .pulse{
   width:6px;height:6px;border-radius:50%;
@@ -270,7 +318,24 @@ button{font-family:inherit}
   flex-wrap:wrap;
 }
 .repo-meta span{display:inline-flex;align-items:center;gap:4px}
-.lang-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.lang-dot{
+  width:9px;height:9px;border-radius:50%;display:inline-block;
+  box-shadow:0 0 0 1px var(--border);
+}
+.repo-topics{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.topic{
+  font-family:var(--mono);font-size:11px;
+  color:var(--text-muted);
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  padding:2px 8px;border-radius:999px;
+  cursor:pointer;transition:.15s;
+}
+.topic:hover{color:var(--accent);border-color:var(--accent)}
+.topic-more{
+  font-family:var(--mono);font-size:11px;
+  color:var(--text-soft);padding:2px 4px;
+}
 
 .repo-actions{display:flex;gap:8px;flex-shrink:0}
 
@@ -281,21 +346,20 @@ button{font-family:inherit}
   cursor:pointer;transition:.15s;border:1px solid;
   white-space:nowrap;
 }
-.btn-primary{background:var(--accent);color:white;border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
-.btn-secondary{
-  background:var(--surface);color:var(--text);
-  border-color:var(--border-strong);
-}
+.btn-secondary{background:var(--surface);color:var(--text);border-color:var(--border-strong)}
 .btn-secondary:hover{background:var(--surface-2);border-color:var(--text-soft)}
 .btn svg{width:13px;height:13px}
 
+/* ---------- pagination ---------- */
 .pagination{
   display:flex;align-items:center;justify-content:space-between;
   margin-top:24px;flex-wrap:wrap;gap:16px;
 }
 .pagination-info{
-  font-size:13px;color:var(--text-soft);
+  font-family:var(--mono);
+  font-size:12.5px;color:var(--text-soft);
   font-variant-numeric:tabular-nums;
 }
 .pagination-info b{color:var(--text);font-weight:600}
@@ -310,29 +374,21 @@ button{font-family:inherit}
   border-radius:var(--radius-sm);cursor:pointer;
   transition:.15s;padding:0 10px;
 }
-.page-btn:hover:not(:disabled){
-  color:var(--text);border-color:var(--border-strong);
-  background:var(--surface-2);
-}
-.page-btn.active{
-  background:var(--accent);color:white;
-  border-color:var(--accent);
-}
+.page-btn:hover:not(:disabled){color:var(--text);border-color:var(--border-strong);background:var(--surface-2)}
+.page-btn.active{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .page-btn.active:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
 .page-btn:disabled{opacity:.4;cursor:not-allowed}
 .page-ellipsis{color:var(--text-soft);padding:0 4px;font-size:13px}
 
+/* ---------- states ---------- */
 .state{
   text-align:center;padding:60px 20px;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
 }
-.state h3{
-  font-family:var(--serif);font-size:20px;font-weight:500;
-  color:var(--text);margin-bottom:8px;
-}
-.state p{font-size:14px;color:var(--text-muted);max-width:400px;margin:0 auto}
+.state h3{font-size:19px;font-weight:600;color:var(--text);margin-bottom:8px}
+.state p{font-size:14px;color:var(--text-muted);max-width:420px;margin:0 auto}
 .state a{color:var(--accent);font-weight:500}
 
 .skel{
@@ -341,10 +397,7 @@ button{font-family:inherit}
   border-radius:var(--radius);
   overflow:hidden;
 }
-.skel-row{
-  height:90px;border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
+.skel-row{height:96px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
 .skel-row:last-child{border-bottom:none}
 .skel-row::after{
   content:"";position:absolute;inset:0;
@@ -353,18 +406,45 @@ button{font-family:inherit}
 }
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.contact-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow-sm);
+}
+.contact-label{
+  font-family:var(--mono);
+  font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-soft);
+  margin-bottom:10px;
+}
+.contact-value{
+  display:inline-block;
+  font-size:19px;font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--text);
+  margin-bottom:8px;
+  transition:.15s;
+  word-break:break-all;
+}
+.contact-value:hover{color:var(--accent)}
+.contact-card p{font-size:14px;color:var(--text-muted);margin-bottom:16px}
+.contact-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
 .footer{
   border-top:1px solid var(--border);
   padding:32px 0;
   font-size:13px;color:var(--text-soft);
 }
-.footer-inner{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;flex-wrap:wrap;
-}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .footer a{color:var(--text-muted);transition:.15s}
 .footer a:hover{color:var(--accent)}
-.footer-links{display:flex;gap:18px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
 
 .repo{animation:fadeIn .25s ease backwards}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -375,6 +455,23 @@ button{font-family:inherit}
   .repo-actions .btn{flex:1}
   .hero{padding:48px 0 32px}
   .pagination{flex-direction:column;align-items:flex-start}
+  .contact-grid{grid-template-columns:1fr}
+  .search kbd{display:none}
+  /* stack controls explicitly: search on its own row, filters + sort share the next */
+  .controls{gap:8px}
+  .search{flex:1 1 100%;min-width:0}
+  .filters{flex:1}
+  .chip{flex:1;text-align:center}
+  .sort-select{flex:1;min-width:0}
+}
+@media (max-width:560px){
+  .brand-text{display:none}
+  .nav{padding:12px 0}
+  .nav-links a{padding:7px 8px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
@@ -382,22 +479,26 @@ button{font-family:inherit}
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="#" class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
-    <div class="brand-mark">
-      <svg viewBox="0 0 28 28" width="20" height="20" aria-hidden="true" focusable="false">
-        <path fill="currentColor" opacity="0.35" d="M8.5 7.5 L21 7.5 L21 11 L14.5 18 L21 18 L21 21.5 L7.5 21.5 L7.5 18 L14 11 L8.5 11 Z"/>
-        <path fill="currentColor" d="M7.5 6.5 L20 6.5 L20 10 L13.5 17 L20 17 L20 20.5 L6.5 20.5 L6.5 17 L13 10 L7.5 10 Z"/>
-        <rect fill="currentColor" x="22" y="8.5" width="3" height="1.2"/>
-        <rect fill="currentColor" x="22" y="11" width="2" height="1.2"/>
-        <rect fill="currentColor" x="3" y="18" width="3" height="1.2"/>
-        <rect fill="currentColor" x="4" y="15.5" width="2" height="1.2"/>
-       </svg>
-     </div>
-     <div class="brand-text">zrnge.com</span></div>
+    <a href="#" class="brand" data-scroll-top aria-label="zrnge.com — back to top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 512 512" focusable="false">
+          <rect width="512" height="512" fill="#0d0d12"/>
+          <path fill="#3a1208" d="M156 132 L368 132 L368 196 L260 318 L368 318 L368 386 L150 386 L150 322 L256 200 L156 200 Z"/>
+          <path fill="#FF4D1C" d="M150 126 L362 126 L362 190 L254 312 L362 312 L362 380 L144 380 L144 316 L250 194 L150 194 Z"/>
+          <path fill="#FFB38A" d="M150 126 L362 126 L362 152 L150 152 Z"/>
+          <path fill="#FFB38A" d="M144 354 L362 354 L362 380 L144 380 Z"/>
+          <path fill="#FF8A3D" d="M384 150 L420 150 L420 162 L384 162 Z M384 174 L408 174 L408 186 L384 186 Z M384 198 L432 198 L432 210 L384 210 Z"/>
+          <path fill="#FF8A3D" d="M92 320 L128 320 L128 332 L92 332 Z M104 344 L128 344 L128 356 L104 356 Z M80 368 L128 368 L128 380 L80 380 Z"/>
+          <path fill="#FFE08A" d="M150 126 L176 126 L150 152 Z"/>
+          <path fill="#FFE08A" d="M336 380 L362 380 L362 354 Z"/>
+        </svg>
+      </span>
+      <span class="brand-text">zrnge<span>.com</span></span>
     </a>
     <div class="nav-links">
       <a href="#projects">Projects</a>
-      <a href="https://github.com/Zrnge" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/zrnge" target="_blank" rel="noopener">GitHub ↗</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
         <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -408,14 +509,17 @@ button{font-family:inherit}
 
 <header class="hero">
   <div class="wrap">
-    <h1>Hi, I'm Zrnge — I <em>build things</em> for free.</h1>
+    <p class="kicker">// Cybersecurity Analyst &amp; Developer</p>
+    <h1>Building tools to <em>detect, analyze, and stop</em> threats.</h1>
     <p class="hero-sub">
-      A collection of projects, experiments, and tools. Live demos open the deployed page; everything else links to source.
+      Open-source security tooling and experiments — log analysis, reverse engineering,
+      incident response, and more. Most of it runs entirely in your browser or on your
+      machine: no backend, no signup, nothing leaves your device.
     </p>
     <div class="hero-meta">
-      <span><b id="metaRepos">—</b> public repos</span>
-      <span><b id="metaLive">—</b> live demos</span>
-      <span><b id="metaStars">—</b> total stars</span>
+      <span><b id="metaRepos">–</b> projects</span>
+      <span><b id="metaLive">–</b> live demos</span>
+      <span><b id="metaStars">–</b> GitHub stars</span>
     </div>
   </div>
 </header>
@@ -430,14 +534,15 @@ button{font-family:inherit}
     <div class="controls">
       <div class="search">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="searchInput" placeholder="Search projects..." />
+        <input type="text" id="searchInput" placeholder="Search projects..." aria-label="Search projects" />
+        <kbd>/</kbd>
       </div>
       <div class="filters" id="filters">
         <button class="chip active" data-filter="all">All</button>
         <button class="chip" data-filter="live">Live</button>
         <button class="chip" data-filter="source">Source</button>
       </div>
-      <select class="sort-select" id="sortSelect">
+      <select class="sort-select" id="sortSelect" aria-label="Sort projects">
         <option value="stars">Most stars</option>
         <option value="updated">Recently updated</option>
         <option value="name">Name (A–Z)</option>
@@ -445,40 +550,93 @@ button{font-family:inherit}
       </select>
     </div>
 
+    <div class="notice" id="dataNotice" role="status" hidden></div>
+
     <div id="repoContainer">
       <div class="skel">
         <div class="skel-row"></div><div class="skel-row"></div>
         <div class="skel-row"></div><div class="skel-row"></div>
         <div class="skel-row"></div>
       </div>
+      <noscript>
+        <style>.skel{display:none}</style>
+        <div class="state">
+          <h3>JavaScript is disabled</h3>
+          <p>The project list needs JavaScript. You can browse everything directly at <a href="https://github.com/zrnge">github.com/zrnge</a>.</p>
+        </div>
+      </noscript>
     </div>
 
     <div id="paginationContainer"></div>
   </div>
 </section>
 
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-label">Email</div>
+        <a class="contact-value" href="mailto:ayub@zrnge.com">ayub@zrnge.com</a>
+        <p>Questions, collaboration, or security reports — I read everything.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:ayub@zrnge.com">Send email</a>
+          <button class="btn btn-secondary" id="copyEmail" type="button">Copy address</button>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">GitHub</div>
+        <a class="contact-value" href="https://github.com/zrnge" target="_blank" rel="noopener">@zrnge</a>
+        <p>Issues and pull requests are welcome on any project.</p>
+        <div class="contact-actions">
+          <a class="btn btn-secondary" href="https://github.com/zrnge" target="_blank" rel="noopener">Open GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="wrap footer-inner">
-    <div>© <span id="year"></span> Zrnge</div>
+    <div>© <span id="year"></span> Zrnge · zrnge.com</div>
     <div class="footer-links">
-      <a href="https://github.com/Zrnge" target="_blank" rel="noopener">GitHub</a>
-      <a href="#projects">Projects</a>
-      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Top ↑</a>
+      <a href="https://github.com/zrnge" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ayub@zrnge.com">ayub@zrnge.com</a>
+      <a href="#" data-scroll-top>Top ↑</a>
     </div>
   </div>
 </footer>
 
 <script>
-const USERNAME = 'Zrnge';
+const USERNAME = 'zrnge';
+// Custom domain for this account's GitHub Pages. github.io URLs 301-redirect
+// here anyway (account-wide CNAME), so link straight to it and skip the hop.
+const SITE_ORIGIN = 'https://zrnge.com';
+const GH_PAGES_ORIGIN = new RegExp(`^https?://${USERNAME}\\.github\\.io`, 'i');
 const API = `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`;
 const PER_PAGE = 10;
+const EMAIL = 'ayub@zrnge.com';
+const CACHE_KEY = 'zrnge:repos:v1';
+const THEME_KEY = 'zrnge:theme';
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+const FETCH_TIMEOUT = 8000;
+// Repos that shouldn't appear in the list (this site itself, etc.)
+const HIDDEN_REPOS = new Set(['zrnge.github.io']);
+
+// Baked-in fallback so the page always shows projects, even when the
+// GitHub API is rate-limited or unreachable. Regenerate occasionally from:
+// https://api.github.com/users/zrnge/repos?per_page=100
+const SNAPSHOT_DATE = '2026-07-02';
+const SNAPSHOT = [{"name":"Z-Hound","description":"browser-based Active Directory attack graph tool for SharpHound and AzureHound collection data. No server. No install. No Neo4j. Upload a ZIP, get an interactive attack graph.","language":"HTML","stars":17,"forks":2,"homepage":"https://zrnge.github.io/Z-Hound/","has_pages":true,"topics":["active-directory","attack-path","bloodhound","cytoscape","graph-visualization","pentesting"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/Z-Hound","created_at":"2026-02-26T18:42:38Z","pushed_at":"2026-04-27T20:02:07Z"},{"name":"LogLens","description":"LogLens is a universal log explorer that runs entirely in your browser. Drop any log file in, query it with KQL, visualize it on a timeline, and analyze it with a local AI - all without a single byte of your data touching the internet.","language":"HTML","stars":7,"forks":0,"homepage":"https://zrnge.github.io/LogLens/","has_pages":true,"topics":["client-side","cybersecurity","devops","html","incident-response","kql"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/LogLens","created_at":"2026-04-11T11:53:48Z","pushed_at":"2026-04-11T13:28:56Z"},{"name":"zmail","description":"ZMail is a single-page diagnostics utility built specifically to solve this. It parses standard RFC822 .eml files and Outlook binary .msg files entirely in your browser.","language":"HTML","stars":4,"forks":0,"homepage":"https://zrnge.github.io/zmail/","has_pages":true,"topics":["email","email-phishing","emailreader","eml","html","lucide-icons"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/zmail","created_at":"2025-08-11T15:30:30Z","pushed_at":"2026-05-31T07:15:51Z"},{"name":"AgentZ","description":"Local AI-powered security incident triage. Connect it to your SIEM, point it at a local Ollama model, and get instant analysis on every alert — nothing leaves your machine.","language":"HTML","stars":4,"forks":0,"homepage":"https://zrnge.github.io/AgentZ/","has_pages":true,"topics":["blue-team","crowdstrike","cybersecurity","elastic-siem","incident-response","llm"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/AgentZ","created_at":"2026-04-13T16:38:37Z","pushed_at":"2026-04-13T17:11:52Z"},{"name":"Malyzer","description":"Agentic, tool-by-tool malware analysis driven by a local LLM (Ollama). Designed for FlareVM environments. No cloud dependencies.","language":"Python","stars":3,"forks":0,"homepage":"","has_pages":false,"topics":["agentic-ai","ai","framework","malware-analysis","malyzer","sandbox"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/Malyzer","created_at":"2026-03-27T16:59:13Z","pushed_at":"2026-05-02T13:07:43Z"},{"name":"s1-power-queries","description":"Power Query collection for SentinelOne - KQL queries, data transformations, and analysis templates for security operations and threat hunting","language":null,"stars":3,"forks":1,"homepage":"","has_pages":false,"topics":["deep-visibility","edr","incident-response","kql","kusto","queries"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/s1-power-queries","created_at":"2026-02-09T11:16:39Z","pushed_at":"2026-02-17T13:00:11Z"},{"name":"dll-analyzer","description":"DLL Analyzer is a Python tool for dynamic analysis of DLLs. It lists exports, lets you define function arguments and return types, and call functions safely from the terminal. Ideal for reverse engineering and malware analysis in a controlled environment.","language":"Python","stars":3,"forks":0,"homepage":"","has_pages":false,"topics":["analyzer","dll"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/dll-analyzer","created_at":"2025-09-11T05:51:13Z","pushed_at":"2026-02-09T12:23:31Z"},{"name":"Mosqito","description":"Mosqito is a cybersecurity research and defensive tool designed to generate visually confusable domain variants. It helps security teams, threat analysts, and SOC engineers detect potential phishing, impersonation, and brand abuse attempts by enumerating domains that exploit Unicode homoglyphs, diacritics, and digit-letter substitutions.","language":"Python","stars":2,"forks":0,"homepage":"","has_pages":false,"topics":["cli","cli-tools","domain-impersonating","masquerade-attack","mosqito","phishing"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/Mosqito","created_at":"2026-01-16T15:50:25Z","pushed_at":"2026-01-19T17:52:11Z"},{"name":"NetMon","description":"NetMon is a graphical, cross-platform tool built with Python and Tkinter designed to provide real-time visibility into all network connections (IPv4, IPv6, TCP, UDP) established by processes on your local machine.","language":"Python","stars":2,"forks":0,"homepage":"","has_pages":false,"topics":["cybersecurity","cybersecurity-tools","network-analysis","network-security"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/NetMon","created_at":"2025-11-14T10:44:17Z","pushed_at":"2026-01-18T18:42:58Z"},{"name":"ease-db","description":"Ease-DB is an \"open-source\", user-friendly SQLite database editor built using Python and Tkinter. It provides essential CRUD (Create, Read, Update, Delete) functionality through a simple graphical interface, making SQLite database management accessible and efficient for developers and enthusiasts.","language":"Python","stars":2,"forks":0,"homepage":"","has_pages":false,"topics":["database","database-editor","database-viewer","db-editor","db-viewer","ease-db"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/ease-db","created_at":"2025-11-16T17:30:57Z","pushed_at":"2026-01-17T08:22:15Z"},{"name":"QR-Reader","description":"A lightweight Python script to decode QR codes from image files using only OpenCV.","language":"Python","stars":1,"forks":0,"homepage":"","has_pages":false,"topics":["gui","qr-code","qrcode","qrcode-scanner","zrnge"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/QR-Reader","created_at":"2025-09-16T17:00:07Z","pushed_at":"2025-11-17T19:47:59Z"},{"name":"sss","description":"Coming Soon","language":null,"stars":1,"forks":0,"homepage":"","has_pages":false,"topics":["cybersecurity","cybersecurity-tools","security","security-scan","sss","static-security-scan"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/sss","created_at":"2026-01-30T08:55:27Z","pushed_at":"2026-01-30T09:02:46Z"},{"name":"neural-playground","description":"A stunning, comprehensive, browser-based neural network simulator built entirely from scratch in vanilla JavaScript. This project serves as an educational tool to understand the inner workings, mathematics, and architectures of powerful AI models.","language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.github.io/neural-playground/","has_pages":true,"topics":["ai","artificial-intelligence","cnn","deep-learning","education","gan"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/neural-playground","created_at":"2026-04-25T17:45:35Z","pushed_at":"2026-04-25T17:51:43Z"},{"name":"sniper","description":"SNIPER is a lightweight, deterministic HTTP fuzzing tool designed for security testing, QA, and automation pipelines.","language":"Python","stars":1,"forks":0,"homepage":"","has_pages":false,"topics":["brute-force","bruteforce","cybersecurity","fuzzer","fuzzing","redteam-tools"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/sniper","created_at":"2026-02-07T18:06:07Z","pushed_at":"2026-02-08T08:08:56Z"},{"name":"doc-reader","description":"A lightweight Python GUI application for reading .docx and legacy .doc files","language":"Python","stars":1,"forks":0,"homepage":"","has_pages":false,"topics":["doc-reader","doc-viewer","document","docx","microsoft","microsoftword"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/doc-reader","created_at":"2026-04-08T16:52:48Z","pushed_at":"2026-04-08T17:04:26Z"},{"name":"webz","description":"Privacy-first, multi-engine AI search & chat - runs entirely in your browser.","language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.github.io/webz/","has_pages":true,"topics":["ai","css3","duckduckgo","frontend","github-pages","html5"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/webz","created_at":"2026-04-27T15:42:20Z","pushed_at":"2026-04-28T12:25:59Z"},{"name":"md-pdf","description":"single-page Markdown to PDF converter","language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.github.io/md-pdf/","has_pages":true,"topics":["markdown","markdown-language","md-pdf","md2pdf","open-source","pdf"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/md-pdf","created_at":"2026-03-29T18:41:19Z","pushed_at":"2026-06-01T18:07:04Z"},{"name":"navybrowser","description":"AI browser automation agent. Private with Ollama or LM Studio. When using cloud providers, page content is sent to their API.","language":"JavaScript","stars":1,"forks":0,"homepage":"","has_pages":false,"topics":[],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/navybrowser","created_at":"2026-06-20T14:04:22Z","pushed_at":"2026-06-20T14:04:33Z"},{"name":"zrnge.github.io","description":null,"language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.com/","has_pages":true,"topics":[],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/zrnge.github.io","created_at":"2026-04-10T14:21:31Z","pushed_at":"2026-06-30T07:21:39Z"},{"name":"webasm","description":"100% client-side multi-architecture static disassembler","language":"TypeScript","stars":1,"forks":0,"homepage":"https://zrnge.github.io/webasm/","has_pages":true,"topics":["arm","arm64","binary-analysis","capstone-engine","client-side","disassembler"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/webasm","created_at":"2026-06-05T08:44:06Z","pushed_at":"2026-06-06T06:10:26Z"},{"name":"WordListGen","description":"WordListGen is an advanced, customizable password wordlist generator written in Python. It is designed for security professionals, penetration testers, and researchers who need to generate targeted password lists based on personal attributes and common transformation techniques.","language":"Python","stars":1,"forks":0,"homepage":"","has_pages":false,"topics":["brute-force-attacks","bruteforce","wordlist-generator","zrnge"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/WordListGen","created_at":"2026-01-13T13:43:25Z","pushed_at":"2026-01-17T06:44:16Z"},{"name":"Cells","description":"Cells guarantees absolute private workflows, storing all sheet contents, typography configurations, custom tab colors, and histories directly on your local machine.","language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.github.io/Cells/","has_pages":true,"topics":["csv","csv-export","csv-reader","excel-export","excelreader","zrnge"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/Cells","created_at":"2025-11-20T06:46:02Z","pushed_at":"2026-05-31T16:01:01Z"},{"name":"zdbg","description":"interactive x86-64 Reverse Engineering simulator","language":"HTML","stars":1,"forks":0,"homepage":"https://zrnge.github.io/zdbg/","has_pages":true,"topics":["dbg","debugger","debugging","reverse-engineering","simulator","zdbg"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/zdbg","created_at":"2026-06-05T08:13:53Z","pushed_at":"2026-06-05T08:14:50Z"},{"name":"navy-coder","description":"AI coding assistant for VS Code — agentic tool-use, file edits with diff approval, multi-provider (Ollama, OpenAI, compatible APIs).","language":"JavaScript","stars":0,"forks":0,"homepage":"https://marketplace.visualstudio.com/items?itemName=Zrnge.navy-coder","has_pages":false,"topics":["agent","ai","anthropic","chat","code-assistant","coder"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/navy-coder","created_at":"2026-07-02T16:25:42Z","pushed_at":"2026-07-02T16:28:14Z"},{"name":"navy-ai","description":"A general-purpose AI terminal agent","language":"Python","stars":0,"forks":0,"homepage":"https://pypi.org/project/navy-ai/","has_pages":false,"topics":["agent","agentic-ai","ai","navy","terminal","voice-control"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/navy-ai","created_at":"2026-06-20T19:19:35Z","pushed_at":"2026-06-20T19:35:40Z"},{"name":"p2p-chat","description":"Secure, stateless, peer-to-peer messaging inside your browser. No servers, no logs, absolute privacy.","language":"JavaScript","stars":0,"forks":0,"homepage":"https://zrnge.github.io/p2p-chat/","has_pages":true,"topics":["aes-256-gcm","chat","cryptography","css","e2e","end-to-end-encryption"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/p2p-chat","created_at":"2026-06-19T20:04:02Z","pushed_at":"2026-06-20T07:19:33Z"},{"name":"powershell-email-extractor","description":"Extracts attachments from .eml files without external libraries.","language":"PowerShell","stars":0,"forks":0,"homepage":"","has_pages":false,"topics":["email","eml","extractor","powershell","powershell-script"],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/powershell-email-extractor","created_at":"2026-06-21T10:16:27Z","pushed_at":"2026-06-24T10:33:21Z"},{"name":"html5-test","description":null,"language":"HTML","stars":0,"forks":0,"homepage":"https://zrnge.github.io/html5-test/","has_pages":true,"topics":[],"fork":false,"archived":false,"html_url":"https://github.com/zrnge/html5-test","created_at":"2026-06-26T06:10:34Z","pushed_at":"2026-06-26T06:11:21Z"}];
 
 const LANG_COLORS = {
   JavaScript:'#f1e05a', TypeScript:'#3178c6', Python:'#3572A5', HTML:'#e34c26',
   CSS:'#563d7c', Java:'#b07219', 'C++':'#f34b7d', C:'#555555', 'C#':'#178600',
   Go:'#00ADD8', Rust:'#dea584', Ruby:'#701516', PHP:'#4F5D95', Swift:'#F05138',
-  Kotlin:'#A97BFF', Dart:'#00B4AB', Shell:'#89e051', Vue:'#41b883', Svelte:'#ff3e00',
-  Astro:'#ff5d01', Lua:'#000080', R:'#198CE7', Scala:'#c22d40',
+  Kotlin:'#A97BFF', Dart:'#00B4AB', Shell:'#89e051', PowerShell:'#012456',
+  Vue:'#41b883', Svelte:'#ff3e00', Astro:'#ff5d01', Lua:'#000080', R:'#198CE7', Scala:'#c22d40',
 };
 
 let allRepos = [];
@@ -491,8 +649,13 @@ let currentPage = 1;
 const $ = (s) => document.querySelector(s);
 const container = $('#repoContainer');
 const paginationContainer = $('#paginationContainer');
+const dataNotice = $('#dataNotice');
+const searchInput = $('#searchInput');
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const scrollBehavior = () =>
+  (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'auto' : 'smooth';
 
 function escapeHtml(str){
   if(!str) return '';
@@ -508,16 +671,89 @@ function timeAgo(date){
   return `${Math.floor(mo/12)}y ago`;
 }
 
+// ---------- data loading (API -> localStorage cache -> baked snapshot) ----------
+
+// Reduce full API objects to just the fields the page uses; keeps the
+// localStorage cache small and gives cache/snapshot/API one shape.
+function slim(r){
+  return {
+    name: r.name, description: r.description, language: r.language,
+    stars: r.stargazers_count, forks: r.forks_count,
+    homepage: r.homepage, has_pages: r.has_pages,
+    topics: r.topics || [], fork: r.fork, archived: r.archived,
+    html_url: r.html_url, created_at: r.created_at, pushed_at: r.pushed_at,
+  };
+}
+function saveCache(list){
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({t: Date.now(), repos: list})); } catch(e){}
+}
+function readCache(){
+  try {
+    const d = JSON.parse(localStorage.getItem(CACHE_KEY));
+    return (d && Array.isArray(d.repos) && d.repos.length) ? d : null;
+  } catch(e){ return null; }
+}
+function showNotice(msg){
+  dataNotice.hidden = !msg;
+  dataNotice.textContent = msg || '';
+}
+function setData(list, noticeMsg){
+  allRepos = list.filter(r => !HIDDEN_REPOS.has(r.name));
+  updateStats();
+  applyFilters();
+  showNotice(noticeMsg);
+}
+
+async function fetchRepos(){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+  let res;
+  try {
+    res = await fetch(API, {signal: ctrl.signal, headers: {'Accept': 'application/vnd.github+json'}});
+  } catch(e) {
+    throw new Error(e && e.name === 'AbortError' ? 'request timed out' : 'network error');
+  } finally {
+    clearTimeout(timer);
+  }
+  if (!res.ok){
+    if (res.status === 403 && res.headers.get('x-ratelimit-remaining') === '0'){
+      const reset = res.headers.get('x-ratelimit-reset');
+      const mins = reset ? Math.max(1, Math.ceil((reset * 1000 - Date.now()) / 60000)) : null;
+      throw new Error('GitHub API rate limit reached' + (mins ? `, resets in ~${mins} min` : ''));
+    }
+    throw new Error(`GitHub API returned ${res.status}`);
+  }
+  const data = await res.json();
+  if (!Array.isArray(data)) throw new Error('unexpected API response');
+  return data.filter(r => !r.private).map(slim);
+}
+
+async function loadRepos(){
+  const cache = readCache();
+  if (cache){
+    setData(cache.repos, null); // paint instantly from cache
+    if (Date.now() - cache.t < CACHE_TTL) return;
+  }
+  try {
+    const list = await fetchRepos();
+    saveCache(list);
+    setData(list, null);
+  } catch(err) {
+    console.warn('[zrnge.com] GitHub fetch failed:', err.message || err);
+    if (cache){
+      showNotice(`Couldn't refresh from GitHub (${err.message}) — showing cached data.`);
+    } else {
+      setData(SNAPSHOT, `Couldn't reach the GitHub API (${err.message}) — showing a saved snapshot from ${SNAPSHOT_DATE}.`);
+    }
+  }
+}
+
+// ---------- filtering / sorting / rendering ----------
 function getPagesUrl(repo){
-  if (repo.name.toLowerCase() === `${USERNAME.toLowerCase()}.github.io`){
-    return `https://${USERNAME.toLowerCase()}.github.io`;
-  }
   if (repo.homepage && /^https?:\/\//i.test(repo.homepage)){
-    return repo.homepage;
+    return repo.homepage.replace(GH_PAGES_ORIGIN, SITE_ORIGIN);
   }
-  if (repo.has_pages){
-    return `https://${USERNAME.toLowerCase()}.github.io/${repo.name}`;
-  }
+  if (repo.has_pages) return `${SITE_ORIGIN}/${repo.name}`;
   return null;
 }
 
@@ -539,13 +775,12 @@ function applyFilters(){
 
   list.sort((a,b) => {
     if (currentSort === 'stars'){
-      // primary: stars desc, tiebreaker: most recently updated
-      if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
-      return new Date(b.updated_at) - new Date(a.updated_at);
+      if (b.stars !== a.stars) return b.stars - a.stars;
+      return new Date(b.pushed_at) - new Date(a.pushed_at);
     }
-    if (currentSort === 'name')  return a.name.localeCompare(b.name);
+    if (currentSort === 'name') return a.name.localeCompare(b.name);
     if (currentSort === 'created') return new Date(b.created_at) - new Date(a.created_at);
-    return new Date(b.updated_at) - new Date(a.updated_at);
+    return new Date(b.pushed_at) - new Date(a.pushed_at);
   });
 
   filteredRepos = list;
@@ -563,12 +798,6 @@ function renderPage(){
 
   if (total === 0){
     $('#resultCount').innerHTML = '';
-  } else {
-    const end = Math.min(start + PER_PAGE, total);
-    $('#resultCount').innerHTML = `Showing <b>${start + 1}–${end}</b> of <b>${total}</b>`;
-  }
-
-  if (total === 0){
     container.innerHTML = `
       <div class="state">
         <h3>No projects found</h3>
@@ -578,12 +807,17 @@ function renderPage(){
     return;
   }
 
+  const end = Math.min(start + PER_PAGE, total);
+  $('#resultCount').innerHTML = `Showing <b>${start + 1}–${end}</b> of <b>${total}</b>`;
+
+  const githubIcon = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>`;
+
   const list = document.createElement('div');
   list.className = 'repo-list';
 
   slice.forEach((repo, i) => {
     const pages = getPagesUrl(repo);
-    const langColor = LANG_COLORS[repo.language] || '#cc785c';
+    const langColor = LANG_COLORS[repo.language] || '#d13f0c';
 
     const repoEl = document.createElement('article');
     repoEl.className = 'repo';
@@ -596,44 +830,48 @@ function renderPage(){
     const meta = `
       <div class="repo-meta">
         ${repo.language ? `<span><i class="lang-dot" style="background:${langColor}"></i>${escapeHtml(repo.language)}</span>` : ''}
-        ${repo.stargazers_count > 0 ? `<span>★ ${repo.stargazers_count}</span>` : ''}
-        ${repo.forks_count > 0 ? `<span>⑂ ${repo.forks_count}</span>` : ''}
-        <span>Updated ${timeAgo(repo.updated_at)}</span>
+        ${repo.stars > 0 ? `<span>★ ${repo.stars}</span>` : ''}
+        ${repo.forks > 0 ? `<span><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>${repo.forks}</span>` : ''}
+        <span>Updated ${timeAgo(repo.pushed_at)}</span>
       </div>`;
 
-    let actions;
-    if (pages){
-      actions = `
-        <div class="repo-actions">
-          <a class="btn btn-primary" href="${escapeHtml(pages)}" target="_blank" rel="noopener">
-            Try Now
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a class="btn btn-secondary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-            Repo
-          </a>
-        </div>`;
-    } else {
-      actions = `
-        <div class="repo-actions">
-          <a class="btn btn-secondary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-            View Repository
-          </a>
-        </div>`;
-    }
+    const topics = repo.topics || [];
+    const shownTopics = topics.slice(0, 3);
+    const topicsHtml = shownTopics.length ? `
+      <div class="repo-topics">
+        ${shownTopics.map(t => `<button type="button" class="topic" data-topic="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('')}
+        ${topics.length > shownTopics.length ? `<span class="topic-more">+${topics.length - shownTopics.length}</span>` : ''}
+      </div>` : '';
+
+    const actions = pages ? `
+      <div class="repo-actions">
+        <a class="btn btn-primary" href="${escapeHtml(pages)}" target="_blank" rel="noopener">
+          Open
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener">
+          ${githubIcon}
+          Source
+        </a>
+      </div>` : `
+      <div class="repo-actions">
+        <a class="btn btn-secondary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener">
+          ${githubIcon}
+          View source
+        </a>
+      </div>`;
 
     repoEl.innerHTML = `
       <div class="repo-main">
         <div class="repo-head">
-          <span class="repo-name">${escapeHtml(repo.name)}</span>
-          ${pages ? `<span class="repo-badge"><span class="pulse"></span>Live</span>` : ''}
-          ${repo.fork ? `<span class="repo-badge" style="color:var(--text-soft);background:var(--surface-2)">Fork</span>` : ''}
-          ${repo.archived ? `<span class="repo-badge" style="color:var(--text-soft);background:var(--surface-2)">Archived</span>` : ''}
+          <a class="repo-name" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener">${escapeHtml(repo.name)}</a>
+          ${pages ? `<span class="repo-badge"><span class="pulse"></span>LIVE</span>` : ''}
+          ${repo.fork ? `<span class="repo-badge" style="color:var(--text-soft);background:var(--surface-2)">FORK</span>` : ''}
+          ${repo.archived ? `<span class="repo-badge" style="color:var(--text-soft);background:var(--surface-2)">ARCHIVED</span>` : ''}
         </div>
         ${desc}
         ${meta}
+        ${topicsHtml}
       </div>
       ${actions}
     `;
@@ -650,9 +888,9 @@ function renderPagination(totalPages){
   if (totalPages <= 1){ paginationContainer.innerHTML = ''; return; }
 
   const pages = [];
-  const window = 1;
+  const win = 1;
   for (let i = 1; i <= totalPages; i++){
-    if (i === 1 || i === totalPages || (i >= currentPage - window && i <= currentPage + window)){
+    if (i === 1 || i === totalPages || (i >= currentPage - win && i <= currentPage + win)){
       pages.push(i);
     } else if (pages[pages.length - 1] !== '…'){
       pages.push('…');
@@ -670,9 +908,9 @@ function renderPagination(totalPages){
         Page <b>${currentPage}</b> of <b>${totalPages}</b>
       </div>
       <div class="pagination-controls">
-        <button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''} aria-label="Previous">←</button>
+        <button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''} aria-label="Previous page">←</button>
         ${pageButtons}
-        <button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Next">→</button>
+        <button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Next page">→</button>
       </div>
     </div>
   `;
@@ -684,73 +922,40 @@ function renderPagination(totalPages){
       else if (v === 'next' && currentPage < totalPages) currentPage++;
       else if (!isNaN(parseInt(v))) currentPage = parseInt(v);
       renderPage();
-      document.getElementById('projects').scrollIntoView({behavior:'smooth', block:'start'});
+      document.getElementById('projects').scrollIntoView({behavior: scrollBehavior(), block:'start'});
     });
   });
 }
 
 function updateStats(){
   const live = allRepos.filter(r => getPagesUrl(r)).length;
-  const stars = allRepos.reduce((s,r) => s + r.stargazers_count, 0);
+  const stars = allRepos.reduce((s,r) => s + (r.stars || 0), 0);
   $('#metaRepos').textContent = allRepos.length;
   $('#metaLive').textContent = live;
   $('#metaStars').textContent = stars;
 }
 
-async function loadRepos(){
-  try {
-    console.log(`[zrnge.github.io] Fetching repos from: ${API}`);
-    const res = await fetch(API);
-    console.log(`[zrnge.github.io] Response status: ${res.status}`);
-
-    if (!res.ok){
-      if (res.status === 404) throw new Error(`User "${USERNAME}" not found on GitHub. Check the username spelling.`);
-      if (res.status === 403){
-        const remaining = res.headers.get('x-ratelimit-remaining');
-        if (remaining === '0'){
-          const reset = res.headers.get('x-ratelimit-reset');
-          const minutes = reset ? Math.ceil((parseInt(reset) * 1000 - Date.now()) / 60000) : '?';
-          throw new Error(`GitHub API rate limit reached (60/hour for unauthenticated requests). Resets in ~${minutes} minute(s).`);
-        }
-        throw new Error('GitHub API access forbidden (403).');
-      }
-      throw new Error(`GitHub API error (${res.status} ${res.statusText})`);
-    }
-
-    const repos = await res.json();
-    console.log(`[zrnge.github.io] Loaded ${repos.length} repos`);
-
-    if (!Array.isArray(repos)){
-      throw new Error('Unexpected API response format.');
-    }
-    if (repos.length === 0){
-      container.innerHTML = `
-        <div class="state">
-          <h3>No public repositories yet</h3>
-          <p>This GitHub account doesn't have any public repos to show. Visit <a href="https://github.com/${USERNAME}" target="_blank" rel="noopener">github.com/${USERNAME}</a>.</p>
-        </div>`;
-      paginationContainer.innerHTML = '';
-      return;
-    }
-
-    allRepos = repos.filter(r => !r.private);
-    updateStats();
-    applyFilters();
-  } catch (err){
-    console.error('[zrnge.github.io] Failed to load repos:', err);
-    container.innerHTML = `
-      <div class="state">
-        <h3>Couldn't load repositories</h3>
-        <p style="margin-bottom:12px">${escapeHtml(err.message)}</p>
-        <p style="font-size:12px;color:var(--text-soft)">Open your browser's developer console (F12) for more details, or visit <a href="https://github.com/${USERNAME}" target="_blank" rel="noopener">github.com/${USERNAME}</a> directly.</p>
-      </div>`;
-    paginationContainer.innerHTML = '';
-  }
-}
-
-$('#searchInput').addEventListener('input', e => {
+// ---------- controls ----------
+searchInput.addEventListener('input', e => {
   currentSearch = e.target.value.trim();
   applyFilters();
+});
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    searchInput.value = '';
+    currentSearch = '';
+    applyFilters();
+    searchInput.blur();
+  }
+});
+window.addEventListener('keydown', e => {
+  if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey){
+    const t = e.target, tag = (t.tagName || '').toLowerCase();
+    if (tag !== 'input' && tag !== 'textarea' && tag !== 'select' && !t.isContentEditable){
+      e.preventDefault();
+      searchInput.focus();
+    }
+  }
 });
 $('#sortSelect').addEventListener('change', e => {
   currentSort = e.target.value;
@@ -764,27 +969,68 @@ document.querySelectorAll('.chip').forEach(c => {
     applyFilters();
   });
 });
-
-// ---------- theme toggle ----------
-let userOverrodeTheme = false;
-
-function setTheme(theme){
-  document.documentElement.setAttribute('data-theme', theme);
-  window.__zrngeTheme = theme;
-}
-
-document.getElementById('themeToggle').addEventListener('click', () => {
-  userOverrodeTheme = true;
-  const current = document.documentElement.getAttribute('data-theme');
-  setTheme(current === 'dark' ? 'light' : 'dark');
+// Topic chips are rendered per-repo; delegate so one listener covers all pages.
+container.addEventListener('click', e => {
+  const chip = e.target.closest('.topic');
+  if (!chip) return;
+  searchInput.value = chip.dataset.topic;
+  currentSearch = chip.dataset.topic;
+  applyFilters();
+});
+document.querySelectorAll('[data-scroll-top]').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({top: 0, behavior: scrollBehavior()});
+  });
 });
 
-// Follow system theme changes — but only if the user hasn't manually toggled this session
+// ---------- contact: copy email ----------
+const copyBtn = $('#copyEmail');
+let copyResetTimer;
+function copyFeedback(label){
+  copyBtn.textContent = label;
+  clearTimeout(copyResetTimer);
+  copyResetTimer = setTimeout(() => { copyBtn.textContent = 'Copy address'; }, 1600);
+}
+copyBtn.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(EMAIL);
+    copyFeedback('Copied ✓');
+  } catch(e) {
+    // Clipboard API needs a secure context; fall back to a temp textarea.
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = EMAIL;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      copyFeedback('Copied ✓');
+    } catch(e2) {
+      copyFeedback('Press Ctrl+C');
+    }
+  }
+});
+
+// ---------- theme ----------
+function setTheme(theme, persist){
+  document.documentElement.setAttribute('data-theme', theme);
+  if (persist){
+    try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  }
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark', true);
+});
+// Follow system changes only while the user hasn't picked a theme themselves.
 if (window.matchMedia){
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
   const handler = (e) => {
-    if (userOverrodeTheme) return;
-    setTheme(e.matches ? 'dark' : 'light');
+    try { if (localStorage.getItem(THEME_KEY)) return; } catch(err){}
+    setTheme(e.matches ? 'dark' : 'light', false);
   };
   if (mq.addEventListener) mq.addEventListener('change', handler);
   else if (mq.addListener) mq.addListener(handler);
